@@ -27,7 +27,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var categoryRouters = require("./routes/categoryRouter");
 var productRouters = require("./routes/productRouter");
-var imageRouters = require("./routes/imageRouter");
+var imageRouters = require("./routes/ImageRouter");
 
 var app = express();
 
