@@ -1,0 +1,36 @@
+cateID CateName                 paren ID
+CA01   điện thoại               null
+CA02    laptop                  null
+CA03    điện thoại thông minh   CA03
+
+//string(text), number, null, object, array, true/false
+[
+    {
+        "CateID": "PR01",
+        "CateName": "ĐT",
+        "price": "15000",
+        "image": {
+            "id": 1,
+            "link": "https:............"
+        },
+        {
+            "id": 2,
+            "link": "https:................"
+        }
+    },
+    {
+        "CateID": "CA02",
+        "CateName": "Laptop",
+        "ParentID": "null"
+    },
+    {
+        "CateID": "CA03",
+        "cateName": "dien thoai thong minh",
+        "ParentID": {
+            //lay dc chi tiet cua cateID = CA01
+            "CateID": "CA01",
+            "cateName": "dienthoai",
+            "ParentID": null
+        }
+    }
+]

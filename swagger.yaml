@@ -1,0 +1,271 @@
+openapi: 3.0.4
+info:
+  title: HaLmao
+  description: AIZ CRUD
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+
+tags:
+  - name: product
+  - name: category
+  - name: user
+  - name: order
+
+paths:
+
+  # ================== PRODUCT (4 API) ==================
+  /products:
+    post:
+      tags: [product]
+      summary: Create product
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Created
+
+    get:
+      tags: [product]
+      summary: Get all products
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: Success
+
+  /products/{id}:
+    get:
+      tags: [product]
+      summary: Get product by ID
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+
+    put:
+      tags: [product]
+      summary: Update product
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Updated
+
+    delete:
+      tags: [product]
+      summary: Delete product
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deleted
+
+
+  # ================== CATEGORY (4 API) ==================
+  /categories:
+    post:
+      tags: [category]
+      summary: Create category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Created
+
+    get:
+      tags: [category]
+      summary: Get all categories
+      responses:
+        '200':
+          description: Success
+
+  /categories/{id}:
+    put:
+      tags: [category]
+      summary: Update category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Updated
+
+    delete:
+      tags: [category]
+      summary: Delete category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+
+
+  # ================== USER (4 API) ==================
+  /users:
+    post:
+      tags: [user]
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created
+
+    get:
+      tags: [user]
+      summary: Get all users
+      responses:
+        '200':
+          description: Success
+
+  /users/{id}:
+    put:
+      tags: [user]
+      summary: Update user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Updated
+
+    delete:
+      tags: [user]
+      summary: Delete user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+
+
+  # ================== ORDER (3 API) ==================
+  /orders:
+    post:
+      tags: [order]
+      summary: Create order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Created
+
+    get:
+      tags: [order]
+      summary: Get all orders
+      responses:
+        '200':
+          description: Success
+
+  /orders/{id}:
+    delete:
+      tags: [order]
+      summary: Delete order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+
+
+components:
+  schemas:
+
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        image:
+          type: string
+
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    Order:
+      type: object
+      properties:
+        userId:
+          type: string
+        total:
+          type: number

@@ -1,0 +1,339 @@
+openapi: 3.0.0
+info:
+  title: HaDz
+  version: 1.0.0
+  description: bài swagger
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Category
+  - name: Product
+  - name: User
+  - name: Order
+  - name: Review
+
+# ====================== PATHS ======================
+paths:
+
+# ================= CATEGORY (3 API) =================
+  /category:
+    get:
+      tags: [Category]
+      summary: Lấy danh sách category
+      responses:
+        "200":
+          description: Thành công
+
+    post:
+      tags: [Category]
+      summary: Thêm category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "201":
+          description: Đã tạo
+
+  /category/{id}:
+    get:
+      tags: [Category]
+      summary: Lấy category theo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Thành công
+
+    put:
+      tags: [Category]
+      summary: Cập nhật category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: Đã cập nhật
+
+    delete:
+      tags: [Category]
+      summary: Xóa category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Đã xóa
+
+# ================= PRODUCT (3 API) =================
+  /product/all:
+    get:
+      tags: [Product]
+      summary: Lấy danh sách sản phẩm
+      responses:
+        "200":
+          description: Thành công
+
+  /product/add-product:
+    post:
+      tags: [Product]
+      summary: Thêm sản phẩm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Đã thêm
+
+  /product/{id}:
+    put:
+      tags: [Product]
+      summary: Cập nhật sản phẩm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Đã cập nhật
+
+    delete:
+      tags: [Product]
+      summary: Xóa sản phẩm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Đã xóa
+
+# ================= USER (3 API) =================
+  /users:
+    get:
+      tags: [User]
+      summary: Lấy danh sách user
+      responses:
+        "200":
+          description: Thành công
+
+    post:
+      tags: [User]
+      summary: Đăng ký user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: Đã tạo
+
+  /users/{id}:
+    put:
+      tags: [User]
+      summary: Cập nhật user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Đã cập nhật
+
+    delete:
+      tags: [User]
+      summary: Xóa user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Đã xóa
+
+# ================= ORDER (3 API) =================
+  /order:
+    get:
+      tags: [Order]
+      summary: Lấy danh sách đơn hàng
+      responses:
+        "200":
+          description: Thành công
+
+    post:
+      tags: [Order]
+      summary: Tạo đơn hàng
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+      responses:
+        "201":
+          description: Đã tạo
+
+  /order/{id}:
+    put:
+      tags: [Order]
+      summary: Cập nhật đơn hàng
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Order"
+      responses:
+        "200":
+          description: Đã cập nhật
+
+# ================= REVIEW (3 API) =================
+  /review:
+    get:
+      tags: [Review]
+      summary: Lấy danh sách đánh giá
+      responses:
+        "200":
+          description: Thành công
+
+    post:
+      tags: [Review]
+      summary: Thêm đánh giá
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Review"
+      responses:
+        "201":
+          description: Đã thêm
+
+  /review/{id}:
+    delete:
+      tags: [Review]
+      summary: Xóa đánh giá
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Đã xóa
+
+# ====================== SCHEMAS ======================
+components:
+  schemas:
+    Category:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: Áo quần
+
+    Product:
+      type: object
+      required: [name, price, quantity]
+      properties:
+        name:
+          type: string
+          example: Áo thun
+        description:
+          type: string
+          example: Áo cotton mịn
+        price:
+          type: number
+          example: 150000
+        quantity:
+          type: number
+          example: 10
+        stats:
+          type: boolean
+          example: true
+
+    User:
+      type: object
+      required: [username, email]
+      properties:
+        username:
+          type: string
+          example: admin
+        email:
+          type: string
+          example: admin@gmail.com
+
+    Order:
+      type: object
+      required: [userId, total]
+      properties:
+        userId:
+          type: string
+          example: 65fc...abc
+        total:
+          type: number
+          example: 500000
+
+    Review:
+      type: object
+      required: [productId, content]
+      properties:
+        productId:
+          type: string
+          example: 65fc...abc
+        content:
+          type: string
+          example: Sản phẩm rất tốt
